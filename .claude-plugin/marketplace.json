@@ -1,0 +1,38 @@
+{
+  "name": "stratafy",
+  "version": "1.0.0",
+  "owner": {
+    "name": "Stratafy",
+    "email": "hello@stratafy.com"
+  },
+  "metadata": {
+    "description": "Stratafy is the operating system for strategy. These plugins bring strategic intelligence into Claude — from workspace management and coaching to execution tracking and signal intelligence.",
+    "pluginRoot": "./",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "stratafy-cowork",
+      "source": "./stratafy-cowork",
+      "description": "Turn strategy sessions into living strategic workspaces. Set up client workspaces, debrief sessions, track execution, and run intelligence scans — powered by 135+ strategic tools via MCP.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Stratafy"
+      },
+      "homepage": "https://stratafy.ai",
+      "repository": "https://github.com/Stratafy-ai/stratafy-plugins",
+      "license": "Apache-2.0",
+      "keywords": [
+        "strategy",
+        "coaching",
+        "workspace",
+        "okr",
+        "risk",
+        "signals",
+        "mcp",
+        "cowork"
+      ],
+      "category": "productivity"
+    }
+  ]
+}
