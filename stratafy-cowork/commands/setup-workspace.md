@@ -47,6 +47,8 @@ Use web search to supplement with:
 - Recent press coverage
 - Industry context
 
+**Immediately after research, save workspace context.** Call `update_workspace_context` with everything you found: industry, stage, market position, key products, competitors, revenue, team size. This is factual research data — it does not need user confirmation. Do this BEFORE presenting any draft.
+
 ### Step 2: Present Foundation Draft
 
 Present ONLY the foundation — not strategies, initiatives, or assumptions. Frame it as "here's what I found" not "tell me about your company."
@@ -76,15 +78,9 @@ WHAT I COULDN'T FIND
 
 Do NOT present strategies, assumptions, or risks yet. That comes after the foundation is locked in.
 
-### Step 3: Confirm Context & Build Foundation
+### Step 3: Confirm & Build Foundation
 
-This step has two parts. Complete both before moving to strategy.
-
-**Part A: Confirm and save workspace context.**
-
-Confirm the CONTEXT section with the user, then call `update_workspace_context` immediately with industry, stage, market position, key products, competitors, revenue, team size. This is not optional — it powers radar scans and agent context.
-
-**Part B: Confirm and save foundation.**
+Workspace context is already saved (Step 1). Now focus entirely on the foundation.
 
 Ask targeted refinement questions about mission, vision, values, beliefs:
 
@@ -95,11 +91,10 @@ Ask targeted refinement questions about mission, vision, values, beliefs:
 Once confirmed, **build ALL foundation entities and verify each succeeded**:
 
 1. Select or create the workspace
-2. `update_workspace_context` (if not already done in Part A)
-3. `update_mission`, `update_vision`
-4. `create_value` for EACH value (one call per value)
-5. `create_principle` for any operating principles
-6. `create_belief` for EACH belief (one call per belief)
+2. `update_mission`, `update_vision`
+3. `create_value` for EACH value (one call per value)
+4. `create_principle` for any operating principles
+5. `create_belief` for EACH belief (one call per belief)
 
 **Before moving to Step 4, verify the foundation is complete.** If any create call failed, fix it now. Do NOT proceed to strategies with a half-built foundation.
 

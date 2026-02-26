@@ -41,7 +41,9 @@ Scrape the company website and search the web. Pull out everything you can:
 - Recent press coverage or announcements
 - Methodology signals (do they mention OKRs, Scaling Up, EOS anywhere?)
 
-**Present ONLY the foundation draft first — do NOT include strategies, initiatives, or assumptions yet.** Save those for after the foundation is confirmed. The draft should look like this:
+**Immediately after research, save the workspace context.** Call `update_workspace_context` with everything you found: industry, stage, market position, key products, competitors, revenue, team size, CEO, funding status. This is factual data from research — it does not need user confirmation. Do this BEFORE presenting any draft. Workspace context powers radar scans, coherence checks, and agent context, so it must be populated early.
+
+**Then present ONLY the foundation draft — do NOT include strategies, initiatives, or assumptions yet.** Save those for after the foundation is confirmed. The draft should look like this:
 
 ```
 FOUNDATION DRAFT — [Company Name]
@@ -69,15 +71,9 @@ WHAT I COULDN'T FIND
 
 Do NOT present the strategy tree, initiatives, assumptions, or risks at this stage. That comes after the foundation is locked in.
 
-### 3. Confirm Context & Build Foundation
+### 3. Confirm & Build Foundation
 
-This step has two parts. Do both before moving to strategy.
-
-**Part A: Confirm and save the workspace context.**
-
-Present the CONTEXT section from your draft and ask the user to confirm it's accurate. Once confirmed, call `update_workspace_context` immediately with structured company info (industry, stage, market position, key products, competitors, revenue, team size — whatever you found). This is not optional — workspace context powers radar scans, coherence checks, and agent context generation. Do it before anything else.
-
-**Part B: Confirm and save the foundation.**
+Workspace context is already saved (Step 2). Now focus entirely on getting the foundation right.
 
 Ask targeted refinement questions about mission, vision, values, beliefs:
 
