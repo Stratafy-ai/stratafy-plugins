@@ -84,35 +84,35 @@ WHAT I COULDN'T FIND
   - [gaps that need human input]
 ```
 
-### 3. Verify Foundation (1 structured confirmation)
+### 3. Verify & Build Foundation First
 
-Present the full draft and ask: "Here's what I found and what I'd suggest. What needs changing?"
+Present the research draft and focus on getting the **foundation right before touching strategy**. The foundation is the bedrock — mission, vision, values, beliefs, workspace context. Get this confirmed and built first.
 
-This is where the real coaching conversation starts. Ask targeted refinement questions based on what you found:
+Ask targeted refinement questions about the foundation:
 
 - "I see you say X on your website — is that still your mission, or has it evolved?"
 - "Your values page mentions A, B, C. Are those the ones the team actually lives by?"
-- "It looks like you're focused on [market]. Is that where the growth is?"
 - "I couldn't find a clear vision statement. What does success look like in 3-5 years?"
-- "Your careers page is hiring heavily for [role]. Is [strategy] the current priority?"
 
-Surface implicit assumptions: "It seems like you're assuming [X] about your market — is that something you've validated?"
+Surface implicit beliefs: "It seems like you believe [X] about your market — is that something you've validated?"
 
-Don't re-ask things the user has already confirmed. Don't wait for perfection — 70% right is enough to start building.
+Once the user confirms (even partially — don't wait for perfection), **build the foundation immediately**:
 
-### 4. Build (bulk, fast)
-
-Once the user confirms (even partially), create everything in one sweep:
-
-**Workspace context first:**
 - `update_workspace_context` with structured company info (industry, stage, market) — this makes radar scans, coherence checks, and agent context work better later
-
-**Foundation:**
 - `update_mission` — confirmed mission
 - `update_vision` — confirmed vision
 - `create_value` for each value — name and description
 - `create_principle` for any operating principles identified
 - `create_belief` for beliefs about the market/world
+
+### 4. Strategy & Execution Layer
+
+Only after the foundation is built, move to the strategic architecture. Present your suggested strategy tree and refine with the user:
+
+- "Based on your website and recent hiring, it looks like your main strategic priorities are [X], [Y], and [Z]. Does that match how you think about it?"
+- "Your careers page is hiring heavily for [role]. Is [strategy] the current priority?"
+
+Once confirmed, build the strategy layer:
 
 **Strategy tree (top-down):**
 - `create_strategy` with `strategy_type: "corporate"` — the overarching direction. Usually one.

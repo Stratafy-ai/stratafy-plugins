@@ -84,32 +84,38 @@ WHAT I COULDN'T FIND
   - [gaps that need human input]
 ```
 
-### Step 3: Verify and Refine
+### Step 3: Verify & Build Foundation First
 
-This is where the real coaching conversation happens. Ask targeted refinement questions based on what you found — not open-ended interrogation:
+Focus on getting the **foundation right before touching strategy**. The foundation is the bedrock — get it confirmed and built first.
+
+Ask targeted refinement questions about the foundation only:
 
 - "I see you say X on your website — is that still your mission, or has it evolved?"
 - "Your values page mentions A, B, C. Are those the ones the team actually lives by?"
-- "It looks like you're focused on [market]. Is that where the growth is, or are you expanding?"
 - "I couldn't find a clear vision statement. What does success look like in 3-5 years?"
-- "Your website emphasises [product]. Is that still the strategic priority?"
 
-Surface implicit assumptions: "It seems like you're assuming [X] about your market — is that something you've validated?"
-
-Let the user correct, add nuance, or confirm. Don't re-ask things they've already confirmed.
-
-### Step 4: Build
-
-Once the user confirms (even partially — don't wait for perfection), create everything in Stratafy:
+Once confirmed (even partially), **build the foundation immediately**:
 
 1. Select or create the workspace
-2. `update_workspace_context` with structured company info (industry, stage, market, key products) — this powers radar scans, coherence checks, and agent context
-3. Set foundation: `update_mission`, `update_vision`, `create_value` for each value
-4. Build strategy tree: `create_strategy` for corporate and functional strategies
-5. Add any initiatives that emerged from the conversation: `create_initiative`
-6. Log assumptions explicitly: `create_assumption` — especially the ones surfaced during verification
-7. Log risks if identified: `create_risk`
-8. Log any decisions already made: `create_decision`
+2. `update_workspace_context` with structured company info (industry, stage, market, key products)
+3. `update_mission`, `update_vision`
+4. `create_value` for each value
+5. `create_principle` for any operating principles
+6. `create_belief` for beliefs about the market/world
+
+### Step 4: Strategy & Execution
+
+Only after the foundation is built, move to the strategic architecture. Present your suggested strategy tree and refine:
+
+- "Based on your website and recent hiring, your main strategic priorities look like [X], [Y], and [Z]. Does that match?"
+
+Once confirmed, build:
+
+1. `create_strategy` for corporate and functional strategies
+2. `create_initiative` for concrete work linked to strategies
+3. `create_assumption` — especially the ones surfaced during verification
+4. `create_risk` if identified
+5. `create_decision` for choices already made or still open
 
 ### Step 5: Summary
 
