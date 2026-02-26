@@ -38,10 +38,11 @@ Turn strategy sessions into living strategic workspaces. Designed for strategy c
 
 ## Setup
 
-After installing, configure your Stratafy connection:
+The plugin uses Stratafy's MCP tools, which connect through Claude's remote MCP integration:
 
-1. Get an API key from your [Stratafy workspace](https://app.stratafy.ai)
-2. When you first use a Stratafy command, Claude will prompt you to connect
+1. Add the **Stratafy MCP server** in your Claude settings (Settings → Integrations → MCP Servers)
+2. Authenticate with your Stratafy account when prompted — this grants access to your workspaces
+3. Use any Stratafy command and Claude will automatically use the connected tools
 
 ## Who This Is For
 
