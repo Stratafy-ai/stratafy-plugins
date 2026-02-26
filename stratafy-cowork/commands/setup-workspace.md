@@ -76,24 +76,32 @@ WHAT I COULDN'T FIND
 
 Do NOT present strategies, assumptions, or risks yet. That comes after the foundation is locked in.
 
-### Step 3: Verify & Build Foundation
+### Step 3: Confirm Context & Build Foundation
 
-Focus entirely on the foundation. Get it confirmed and built before moving on.
+This step has two parts. Complete both before moving to strategy.
 
-Ask targeted refinement questions:
+**Part A: Confirm and save workspace context.**
+
+Confirm the CONTEXT section with the user, then call `update_workspace_context` immediately with industry, stage, market position, key products, competitors, revenue, team size. This is not optional — it powers radar scans and agent context.
+
+**Part B: Confirm and save foundation.**
+
+Ask targeted refinement questions about mission, vision, values, beliefs:
 
 - "I see you say X on your website — is that still your mission, or has it evolved?"
 - "Your values page mentions A, B, C. Are those the ones the team actually lives by?"
 - "I couldn't find a clear vision statement. What does success look like in 3-5 years?"
 
-Once confirmed (even partially), **build the foundation immediately**:
+Once confirmed, **build ALL foundation entities and verify each succeeded**:
 
 1. Select or create the workspace
-2. `update_workspace_context` with structured company info (industry, stage, market, key products)
+2. `update_workspace_context` (if not already done in Part A)
 3. `update_mission`, `update_vision`
-4. `create_value` for each value
+4. `create_value` for EACH value (one call per value)
 5. `create_principle` for any operating principles
-6. `create_belief` for beliefs about the market/world
+6. `create_belief` for EACH belief (one call per belief)
+
+**Before moving to Step 4, verify the foundation is complete.** If any create call failed, fix it now. Do NOT proceed to strategies with a half-built foundation.
 
 ### Step 4: Strategy & Execution
 

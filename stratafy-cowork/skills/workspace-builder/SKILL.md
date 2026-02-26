@@ -69,11 +69,17 @@ WHAT I COULDN'T FIND
 
 Do NOT present the strategy tree, initiatives, assumptions, or risks at this stage. That comes after the foundation is locked in.
 
-### 3. Verify & Build Foundation
+### 3. Confirm Context & Build Foundation
 
-Focus entirely on getting the **foundation right before touching strategy**. The foundation is the bedrock — mission, vision, values, beliefs, workspace context.
+This step has two parts. Do both before moving to strategy.
 
-Ask targeted refinement questions about the foundation only:
+**Part A: Confirm and save the workspace context.**
+
+Present the CONTEXT section from your draft and ask the user to confirm it's accurate. Once confirmed, call `update_workspace_context` immediately with structured company info (industry, stage, market position, key products, competitors, revenue, team size — whatever you found). This is not optional — workspace context powers radar scans, coherence checks, and agent context generation. Do it before anything else.
+
+**Part B: Confirm and save the foundation.**
+
+Ask targeted refinement questions about mission, vision, values, beliefs:
 
 - "I see you say X on your website — is that still your mission, or has it evolved?"
 - "Your values page mentions A, B, C. Are those the ones the team actually lives by?"
@@ -81,14 +87,15 @@ Ask targeted refinement questions about the foundation only:
 
 Surface implicit beliefs: "It seems like you believe [X] about your market — is that something you've validated?"
 
-Once the user confirms (even partially — don't wait for perfection), **build the foundation immediately**:
+Once the user confirms (even partially — don't wait for perfection), **build ALL foundation entities immediately and verify each one succeeded**:
 
-- `update_workspace_context` with structured company info (industry, stage, market) — this makes radar scans, coherence checks, and agent context work better later
-- `update_mission` — confirmed mission
-- `update_vision` — confirmed vision
-- `create_value` for each value — name and description
-- `create_principle` for any operating principles identified
-- `create_belief` for beliefs about the market/world
+1. `update_mission` — confirmed mission
+2. `update_vision` — confirmed vision
+3. `create_value` for EACH value — name and description (one call per value)
+4. `create_principle` for any operating principles identified
+5. `create_belief` for EACH belief (one call per belief)
+
+**IMPORTANT: Before moving to Step 4, verify the foundation is complete.** Call `get_workspace_snapshot` or check the results of each create call. If any entity failed to create (e.g., duplicate name, validation error), fix it now. Do NOT proceed to strategies with a half-built foundation.
 
 ### 4. Strategy & Execution Layer
 
