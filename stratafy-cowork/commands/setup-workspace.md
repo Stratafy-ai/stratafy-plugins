@@ -1,6 +1,6 @@
 # /stratafy:setup-workspace
 
-Set up a new Stratafy workspace for a client or organisation. Guides you through creating the strategic foundation, building the strategy tree, and populating the workspace with initiatives, assumptions, and risks.
+Set up a new Stratafy workspace for a client or organisation. Starts with research, presents a pre-filled draft, then refines and builds — like a strategy consultant who's done their homework.
 
 ## When to Use
 
@@ -8,78 +8,127 @@ Set up a new Stratafy workspace for a client or organisation. Guides you through
 - Setting up your own organisation's workspace
 - Bootstrapping a workspace from existing strategy documents
 
-## Input Options
+## Input
 
-You can provide:
-1. **Nothing** — I'll guide you through an interactive intake
-2. **Session notes or transcripts** — I'll extract the strategy and populate the workspace
-3. **Existing strategy documents** — I'll parse and structure them
-4. **A methodology template** — Tell me your framework (Scaling Up, EOS, OKRs) and I'll set up the right structure
+Ask for just two things:
+1. **Company URL** (required) — their website
+2. **Company name** (optional) — if it's not obvious from the URL
+
+That's it. Don't ask anything else yet.
+
+If the user also provides session notes, strategy documents, or methodology context, accept those as bonus input — but the URL alone is enough to start.
 
 ## Process
 
-### Step 1: Select or Create Workspace
-First, I'll check your available workspaces and either select an existing one or help you set up a new one.
+### Step 1: Research
 
-### Step 2: Foundation
-I'll ask about or extract from your input:
-- **Mission** — Why does this organisation exist?
-- **Vision** — Where is it going in 3-5 years?
-- **Values** — What does it stand for? (3-7 values)
-- **Principles** — How does it operate? (optional, can add later)
+Scrape the company website and pull out everything you can:
+- **What they do** — products, services, value proposition
+- **Mission / purpose** — any stated mission, about page, founder story
+- **Values** — stated values, culture page, how they describe themselves
+- **Market** — industry, target customers, competitors mentioned
+- **Team** — size, leadership, org structure if visible
+- **Products** — product lines, pricing tiers, key features
+- **Recent news** — blog posts, press releases, announcements
+- **Stage** — startup, growth, enterprise (infer from team size, funding, language)
 
-### Step 3: Strategic Architecture
-We'll build the strategy tree:
-- **Corporate strategy** — The overarching direction
-- **Functional strategies** — 3-5 strategic pillars (e.g., Growth, Product, People)
-- **Sub-strategies** — Only where needed for clarity
+Use web search to supplement with:
+- Crunchbase / LinkedIn data if available
+- Recent press coverage
+- Industry context
 
-### Step 4: Execution Layer
-For each strategy, we'll define:
-- **Initiatives** — Concrete work with timelines and owners
-- **Objectives** — Measurable targets (OKRs)
+### Step 2: Present a Pre-Filled Draft
 
-### Step 5: Intelligence Layer
-We'll capture:
-- **Assumptions** — What the strategy is betting on
-- **Risks** — What could go wrong
-- **Key decisions** already made
+Present your findings as a structured draft — not questions. Frame it as "here's what I found" not "tell me about your company."
 
-### Step 6: Summary
-I'll provide a complete summary of everything created, with a checklist of what might still need attention.
+```
+WORKSPACE DRAFT — [Company Name]
+Based on: [URL] + web research
+
+FOUNDATION
+  Mission: [drafted from website/about page]
+  Vision: [inferred from messaging, or "Not found — we'll define this together"]
+  Values: [extracted from values/culture page, or inferred from language]
+    1. [Value] — [description]
+    2. [Value] — [description]
+    ...
+
+STRATEGIC LANDSCAPE
+  Industry: [identified]
+  Market position: [inferred]
+  Key products/services: [listed]
+  Apparent strategic priorities: [inferred from website emphasis, recent content]
+
+SUGGESTED STRATEGY TREE
+  Corporate: [inferred overarching direction]
+    ├── [Functional strategy 1] — based on [evidence]
+    ├── [Functional strategy 2] — based on [evidence]
+    └── [Functional strategy 3] — based on [evidence]
+
+ASSUMPTIONS I'M MAKING
+  - [assumption about their market]
+  - [assumption about their stage]
+  - [assumption about their priorities]
+
+WHAT I COULDN'T FIND
+  - [gaps that need human input]
+```
+
+### Step 3: Verify and Refine
+
+This is where the real coaching conversation happens. Ask targeted refinement questions based on what you found — not open-ended interrogation:
+
+- "I see you say X on your website — is that still your mission, or has it evolved?"
+- "Your values page mentions A, B, C. Are those the ones the team actually lives by?"
+- "It looks like you're focused on [market]. Is that where the growth is, or are you expanding?"
+- "I couldn't find a clear vision statement. What does success look like in 3-5 years?"
+- "Your website emphasises [product]. Is that still the strategic priority?"
+
+Surface implicit assumptions: "It seems like you're assuming [X] about your market — is that something you've validated?"
+
+Let the user correct, add nuance, or confirm. Don't re-ask things they've already confirmed.
+
+### Step 4: Build
+
+Once the user confirms (even partially — don't wait for perfection), create everything in Stratafy:
+
+1. Select or create the workspace
+2. Set foundation: `update_mission`, `update_vision`, `create_value` for each value
+3. Build strategy tree: `create_strategy` for corporate and functional strategies
+4. Add any initiatives that emerged from the conversation: `create_initiative`
+5. Log assumptions explicitly: `create_assumption` — especially the ones surfaced during verification
+6. Log risks if identified: `create_risk`
+7. Log any decisions already made: `create_decision`
+
+### Step 5: Summary
+
+Present what was created:
+- Total entities created (strategies, initiatives, assumptions, etc.)
+- The strategy tree visualised
+- What's populated vs. what's still a placeholder
+- Suggested next steps: "In your first session, I'd focus on [X] — that's where the gaps are"
+
+## Key Principles
+
+- **Research first, ask second** — never open with "tell me about your company" when you can look it up
+- **Draft, don't interrogate** — present a hypothesis for them to react to, not a blank form to fill out
+- **Surface assumptions** — the most valuable part is making implicit beliefs explicit
+- **Good enough to start** — a 70% populated workspace is better than a perfect plan that never ships. They can refine in future sessions
+- **Use their language** — if the website says "customers" don't say "clients." If they say "team members" don't say "employees"
 
 ## Methodology Adaptations
 
-**If you mention Scaling Up:**
-- I'll structure the foundation around Core Values, Core Purpose, and BHAG
-- Strategies map to Key Thrusts/Capabilities
-- Initiatives become Rocks
-- Metrics become Critical Numbers
+If the user mentions a methodology, adapt the structure:
 
-**If you mention EOS:**
-- Foundation maps to Core Values + Core Focus
-- Vision maps to 10-Year Target and 3-Year Picture
-- Initiatives become Rocks
-- Metrics become Scorecard items
+**Scaling Up:** Foundation = Core Values + Core Purpose + BHAG. Strategies = Key Thrusts/Capabilities. Initiatives = Rocks. Metrics = Critical Numbers.
 
-**If you mention OKRs:**
-- Strategy pillars become the objective containers
-- Key Results are created under each objective
-- Initiatives support the key results
+**EOS:** Foundation = Core Values + Core Focus. Vision = 10-Year Target + 3-Year Picture. Initiatives = Rocks. Metrics = Scorecard items.
 
-## Output
-
-A fully populated Stratafy workspace with:
-- Complete strategic foundation
-- Strategy tree with 3-5+ strategies
-- Initiatives linked to strategies
-- Assumptions and risks identified
-- Key decisions logged
-
-Plus a plain-language summary of the strategic architecture suitable for sharing with the client or team.
+**OKRs:** Strategy pillars become objective containers. Key Results under each. Initiatives support key results.
 
 ## Supercharged with Connectors
 
-If you have **Notion** connected, I can pull existing strategy documents from your Notion workspace.
-If you have **Google Calendar** connected, I can check upcoming planning sessions to set timeline context.
-If you have **Slack** connected, I can review relevant channel discussions for strategic context.
+If you have **Notion** connected, pull existing strategy documents from their Notion workspace.
+If you have **Google Calendar** connected, check upcoming planning sessions for timeline context.
+If you have **Slack** connected, review relevant channel discussions for strategic context.
+If you have **LinkedIn** data via web search, enrich the company profile with team and funding information.
