@@ -8,6 +8,16 @@ Set up a new Stratafy workspace for a client or organisation. Starts with resear
 - Setting up your own organisation's workspace
 - Bootstrapping a workspace from existing strategy documents
 
+## Available Tools
+
+These Stratafy MCP tools are already available — do not search for them:
+
+- **Workspace:** `select_workspace` (supports `domain` search), `create_workspace`, `update_workspace_context`, `get_workspace_snapshot`
+- **Foundation:** `update_mission`, `update_vision`, `create_value`, `create_principle`, `create_belief`
+- **Strategy:** `create_strategy`, `create_initiative`, `create_objective`, `create_metric`
+- **Intelligence:** `create_assumption`, `create_risk`, `create_insight`, `create_signal`, `create_decision`
+- **Team:** `create_team`, `add_team_member`
+
 ## Input
 
 Ask for just two things:
@@ -26,7 +36,7 @@ Before researching, find the right workspace:
 
 1. **Search by domain first.** Call `select_workspace` with the `domain` parameter set to the company URL (e.g. `domain: "globalaccess.co.za"`). This finds any existing workspace matching that domain and auto-selects it.
 2. **If a match is found**, call `get_workspace_snapshot` to load existing data. Use this as your starting point — don't re-research what's already populated.
-3. **If no match is found**, check the returned workspace list for a name match. If none, you'll create a new workspace during Step 1.
+3. **If no match is found**, check the returned workspace list for a name match. If none, you'll create a new workspace during Step 2.
 
 ### Step 1: Research
 
@@ -76,6 +86,7 @@ FOUNDATION (needs your confirmation)
     2. [Value] — [description]
     ...
   Beliefs: [inferred from how they talk about their market]
+  Principles: [any operating principles detected, or "None found — we'll explore this"]
 
 WHAT I COULDN'T FIND
   - [gaps in the foundation that need human input]
@@ -87,25 +98,38 @@ Do NOT present strategies, assumptions, or risks yet. That comes after the found
 
 ### Step 4: Confirm & Build Foundation
 
-**IMPORTANT: Ask only ONE question per message.** Do not dump 3-5 questions at once. This is a conversation, not a survey. Work through the foundation one piece at a time:
+**IMPORTANT: Ask only ONE question per message.** Do not dump 3-5 questions at once. This is a conversation, not a survey.
 
-1. Start with the most important gap (e.g. "Is this mission accurate, or has it evolved?")
-2. Wait for the answer
-3. Ask the next question based on what they said (e.g. "What does success look like in 3-5 years?")
-4. Continue until mission, vision, values, and beliefs are confirmed
+**You MUST confirm EVERY foundation element before saving.** Work through them one at a time:
 
-Once confirmed, **build ALL foundation entities and verify each succeeded**:
+1. Mission — "Is this mission accurate, or has it evolved?"
+2. Vision — "What does success look like in 3-5 years?"
+3. Values — present the list, ask if they'd keep/change/add
+4. Beliefs — present what you inferred, ask if they resonate
+5. Principles — "Are there any operating principles or rules the team lives by?" (e.g. "We never ship without testing", "Customer calls get returned same day")
+
+**Do NOT skip beliefs or principles.** If you inferred beliefs, present them and ask. If you found no principles, explicitly ask — many companies have unwritten rules worth capturing.
+
+Once ALL elements are confirmed, **build ALL foundation entities and verify each succeeded**:
 
 1. `update_mission`, `update_vision`
 2. `create_value` for EACH value (one call per value)
 3. `create_principle` for any operating principles
 4. `create_belief` for EACH belief (one call per belief)
 
-**Before moving to Step 5, verify the foundation is complete.** If any create call failed, fix it now. Do NOT proceed to strategies with a half-built foundation.
+**Before moving to Step 5, verify the foundation is complete.** If any create call failed, fix it now.
 
-### Step 5: Strategy & Execution
+### Step 5: Pause Before Strategy
 
-**Only after the foundation is built**, present a separate strategy draft:
+After building the foundation, confirm with the user:
+
+"Foundation is complete — mission, vision, [N] values, [N] beliefs, and [N] principles saved. Ready to move on to strategy?"
+
+**WAIT for the user to confirm.** Do NOT immediately present the strategy draft.
+
+### Step 6: Strategy & Execution
+
+Present a strategy draft. Apply the same **one question at a time** rule:
 
 ```
 STRATEGY DRAFT — [Company Name]
@@ -126,7 +150,13 @@ RISKS I'D FLAG
   - [risk based on market / stage / model]
 ```
 
-Refine with the user, then build:
+Present the draft, then ask ONE question at a time:
+- "Is the corporate strategy right — is this the overarching direction?"
+- (wait) "Are these the right functional pillars?"
+- (wait) "Which initiatives are actually in play?"
+- (wait) "Do these assumptions and risks resonate?"
+
+Once confirmed, build:
 
 1. `create_strategy` for corporate and functional strategies
 2. `create_initiative` for concrete work linked to strategies
@@ -134,7 +164,7 @@ Refine with the user, then build:
 4. `create_risk` if identified
 5. `create_decision` for choices already made or still open
 
-### Step 6: Summary
+### Step 7: Summary
 
 Present what was created:
 - Total entities created (strategies, initiatives, assumptions, etc.)
@@ -146,11 +176,13 @@ Present what was created:
 
 - **Research first, ask second** — never open with "tell me about your company" when you can look it up
 - **Save context immediately** — workspace context is factual research data, save it before asking the user anything
+- **One question at a time** — this is a conversation, not a survey. Ask, wait, then ask the next
+- **Confirm everything** — mission, vision, values, beliefs, AND principles must all be confirmed before saving
+- **Pause between phases** — confirm foundation is done before moving to strategy
 - **Draft, don't interrogate** — present a hypothesis for them to react to, not a blank form to fill out
-- **Wait for confirmation** — don't build foundation entities until the user confirms the draft
 - **Surface assumptions** — the most valuable part is making implicit beliefs explicit
-- **Good enough to start** — a 70% populated workspace is better than a perfect plan that never ships. They can refine in future sessions
-- **Use their language** — if the website says "customers" don't say "clients." If they say "team members" don't say "employees"
+- **Good enough to start** — a 70% populated workspace is better than a perfect plan that never ships
+- **Use their language** — if the website says "customers" don't say "clients"
 
 ## Methodology Adaptations
 
