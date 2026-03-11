@@ -1,6 +1,6 @@
 {
   "name": "stratafy",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "owner": {
     "name": "Stratafy",
     "email": "hello@stratafy.com"
@@ -8,7 +8,7 @@
   "metadata": {
     "description": "Stratafy is the operating system for strategy. These plugins bring strategic intelligence into Claude — from workspace management and coaching to strategic finance and daily execution for every team member.",
     "pluginRoot": "./",
-    "version": "1.1.0"
+    "version": "1.2.0"
   },
   "plugins": [
     {
@@ -76,6 +76,30 @@
         "daily",
         "weekly",
         "linear",
+        "mcp",
+        "cowork"
+      ],
+      "category": "productivity"
+    },
+    {
+      "name": "stratafy-chief-of-staff",
+      "source": "./stratafy-chief-of-staff",
+      "description": "Your AI Chief of Staff — cross-functional alignment, executive reporting, initiative tracking, decision facilitation, and operational rhythm for leadership teams.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Stratafy"
+      },
+      "homepage": "https://stratafy.ai",
+      "repository": "https://github.com/Stratafy-ai/stratafy-plugins",
+      "license": "Apache-2.0",
+      "keywords": [
+        "chief-of-staff",
+        "executive",
+        "alignment",
+        "decisions",
+        "initiatives",
+        "leadership",
+        "strategy",
         "mcp",
         "cowork"
       ],
