@@ -8,22 +8,28 @@ Claude Cowork plugins for Stratafy — the operating system for strategy.
 | --- | --- | --- |
 | [`stratafy-cowork`](./stratafy-cowork/) | Strategy coaches & consultants | Workspace setup, session debriefs, strategy reviews, radar scans |
 | [`stratafy-finance`](./stratafy-finance/) | Finance Directors & finance teams | COA design, financial alignment scans, budget mapping, investor prep |
+| [`stratafy-team`](./stratafy-team/) | Every team member | Daily/weekly rhythm, strategic context, role-adapted coaching |
+| [`stratafy-chief-of-staff`](./stratafy-chief-of-staff/) | Founders, CEOs, Chiefs of Staff | Exec briefs, initiative tracking, alignment checks, decision logs |
 
 ## Installation
 
 ```bash
 claude plugins add Stratafy-ai/stratafy-plugins/stratafy-cowork
 claude plugins add Stratafy-ai/stratafy-plugins/stratafy-finance
+claude plugins add Stratafy-ai/stratafy-plugins/stratafy-team
+claude plugins add Stratafy-ai/stratafy-plugins/stratafy-chief-of-staff
 ```
 
 ## Development
 
 Plugins are developed inside the main Stratafy monorepo and synced here for publishing:
 
-| Local (monorepo)    | Published (this repo)  |
-| ------------------- | ---------------------- |
-| `cowork-plugin/`    | `stratafy-cowork/`     |
-| `finance-plugin/`   | `stratafy-finance/`    |
+| Local (monorepo)          | Published (this repo)        |
+| ------------------------- | ---------------------------- |
+| `cowork-plugin/`          | `stratafy-cowork/`           |
+| `finance-plugin/`         | `stratafy-finance/`          |
+| `team-plugin/`            | `stratafy-team/`             |
+| `chief-of-staff-plugin/`  | `stratafy-chief-of-staff/`   |
 
 ### Publishing Changes
 

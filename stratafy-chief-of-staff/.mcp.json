@@ -1,0 +1,24 @@
+{
+  "mcpServers": {
+    "stratafy": {
+      "type": "http",
+      "url": "https://app.stratafy.ai/api/mcp"
+    },
+    "linear": {
+      "type": "http",
+      "url": "https://mcp.linear.app/sse"
+    },
+    "slack": {
+      "type": "http",
+      "url": "https://mcp.slack.com/mcp"
+    },
+    "google-calendar": {
+      "type": "http",
+      "url": "https://gcal.mcp.claude.com/mcp"
+    },
+    "gmail": {
+      "type": "http",
+      "url": "https://gmail.mcp.claude.com/mcp"
+    }
+  }
+}
