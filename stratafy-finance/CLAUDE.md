@@ -99,4 +99,5 @@ Guide users to slash commands when appropriate:
 - Connecting spend to strategy? `/stratafy-finance:budget-mapping`
 - End of quarter? `/stratafy-finance:quarterly-review`
 - Fundraising prep? `/stratafy-finance:investor-prep`
-- Confused about a number? `/stratafy-finance:explain-metric`
+- Metrics health check? `/stratafy-finance:analyse-metrics`
+- Pricing strategy? `/stratafy-finance:pricing-model`
