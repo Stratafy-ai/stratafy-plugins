@@ -1,14 +1,14 @@
 {
   "name": "stratafy",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "owner": {
     "name": "Stratafy",
     "email": "hello@stratafy.com"
   },
   "metadata": {
-    "description": "Stratafy is the operating system for strategy. These plugins bring strategic intelligence into Claude — from workspace management and coaching to execution tracking and signal intelligence.",
+    "description": "Stratafy is the operating system for strategy. These plugins bring strategic intelligence into Claude — from workspace management and coaching to strategic finance and daily execution for every team member.",
     "pluginRoot": "./",
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "plugins": [
     {
@@ -56,6 +56,30 @@
         "cowork"
       ],
       "category": "finance"
+    },
+    {
+      "name": "stratafy-team",
+      "source": "./stratafy-team",
+      "description": "Your AI execution partner — connects daily work to company strategy. Daily rhythm, weekly briefings, strategic context, and role-adapted coaching for every team member.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Stratafy"
+      },
+      "homepage": "https://stratafy.ai",
+      "repository": "https://github.com/Stratafy-ai/stratafy-plugins",
+      "license": "Apache-2.0",
+      "keywords": [
+        "team",
+        "execution",
+        "strategy",
+        "coaching",
+        "daily",
+        "weekly",
+        "linear",
+        "mcp",
+        "cowork"
+      ],
+      "category": "productivity"
     }
   ]
 }
