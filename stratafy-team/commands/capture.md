@@ -40,39 +40,27 @@ In parallel with content fetching:
 - `list_strategies` — Active strategies for relevance matching
 - `list_key_priorities` — Current focus areas
 - `list_assumptions` — Active assumptions to check against
+- `get_document_tree` — To check if a "Bookmarks" section already exists
 
 ### Step 4: Analyse and Extract
 
-From the content, extract:
+From the fetched content, extract the **strategic digest** — not the raw article, but what it means for us:
 
-```
-CONTENT SUMMARY
-Title: [extracted title]
-Author: [author if available]
-Source: [publication/platform]
-Date: [publication date if available]
-URL: [original URL]
+- **Title** — the headline
+- **Author** — who wrote/posted it
+- **Source** — publication, platform, domain
+- **Date** — when it was published
+- **Key claims** — the 3-5 most important assertions or data points
+- **Strategic relevance** — why this matters to our strategy, which strategies it connects to
+- **Implications** — what we should think about or do differently
 
-KEY POINTS
-1. [Most important claim or data point]
-2. [Second most important]
-3. [Third most important]
-
-STRATEGIC RELEVANCE
-[2-3 sentences: why this matters to the company's strategy]
-Connects to: [Strategy/Initiative name(s)]
-```
+**Do NOT store the full article text.** The URL is the source of truth. Store only the strategic analysis.
 
 ### Step 5: Determine Output Types
 
 Based on the analysis, decide what to create:
 
-**Always create:**
-- A **document** via `create_document`
-  - `category`: `"external_capture"`
-  - `title`: The article/post title
-  - `content`: Full extracted text with source attribution
-  - `tags`: Relevant strategy areas, content type, source
+**Always create a document** with the `::source-card` MDC component for rich source attribution.
 
 **Create a signal if:**
 - The content indicates a change in the market, competitive landscape, technology, or regulatory environment
@@ -84,15 +72,79 @@ Based on the analysis, decide what to create:
 - There's a specific "aha" that's worth preserving beyond the raw content
 - A data point changes how you think about an existing strategy or assumption
 
-### Step 6: Store and Connect
+### Step 6: Create Artifacts and Connect
 
-Create the artifacts:
+**Order matters.** Create artifacts in this sequence, then link them together:
+
+#### 6a. Create the document
+
+```
+create_document:
+  title: "[Article/post title]"
+  category: "external_capture"
+  tags: [relevant strategy areas, content type, source domain]
+  metadata:
+    source_url: "https://..."
+    source_domain: "example.com"
+    author: "Author Name"
+    published_date: "2026-03-12"
+    fetch_method: "cloudflare" | "grok" | "pasted"
+    content_type: "article" | "social_media" | "blog" | "news" | "report" | "research"
+  content: |
+    ::source-card{url="https://..." author="Author Name" source="Publication" date="March 12, 2026" type="article"}
+    ::
+
+    ## Why This Matters
+
+    [2-3 sentences connecting to our strategy. Be specific about which strategies are affected and why.]
+
+    ## Key Claims
+
+    1. **[Claim]** — [Strategic annotation: what this means for us]
+    2. **[Claim]** — [Strategic annotation]
+    3. **[Claim]** — [Strategic annotation]
+
+    ## Implications for [Company]
+
+    [What we should think about or do differently based on this content]
+```
+
+#### 6b. Create signal (if warranted)
+
+Create via `create_signal` with the source URL. Get the signal ID from the response.
+
+#### 6c. Create insight (if warranted)
+
+Create via `create_insight` with the source URL. Get the insight ID from the response.
+
+#### 6d. Link everything together
+
+- `link_entities` — document↔signal, document↔insight
+- `link_signal_to_strategy` — signal↔strategies (with impact description)
+
+#### 6e. Place in document tree
+
+Place the document under a **Bookmarks** section with intelligent sub-folders:
+
+1. Check if a root-level section named "Bookmarks" exists in the document tree (from Step 3)
+2. If not, create it: `create_tree_section` with `label: "Bookmarks"`, `icon: "i-lucide-bookmark"`
+3. Decide the sub-folder based on the content topic. Look at existing sub-folders first — reuse one if it fits. Examples:
+   - "AI & Architecture" for AI/tech architecture content
+   - "Market & Competitors" for competitive intelligence
+   - "Industry News" for general industry developments
+   - "Product Ideas" for feature inspiration
+   - "Regulatory & Compliance" for legal/regulatory changes
+4. If no existing sub-folder fits, create a new one: `create_tree_section` with a descriptive label and appropriate icon
+5. Place the document: `place_document_in_tree` with `document_id`, `parent_id` (the sub-folder ID)
+
+### Step 7: Present Results
 
 ```
 ✅ CAPTURED
 
 📄 Document: "[Title]"
    Source: [author] via [publication], [date]
+   📁 Bookmarks → [Sub-folder name]
    [Link to document in Stratafy]
 
 📡 Signal: "[Signal title]" (if created)
@@ -108,7 +160,7 @@ Create the artifacts:
    → [Strategy 2 if applicable]
 ```
 
-### Step 7: Prompt for More
+### Step 8: Prompt for More
 
 After capturing:
 - "Anything else you'd like me to capture?"
@@ -121,7 +173,8 @@ When the user provides multiple URLs:
 1. Fetch all URLs in parallel
 2. Analyse each independently
 3. Look for **patterns across captures** — do they all point to the same trend?
-4. Present a summary:
+4. Place all documents in the same Bookmarks sub-folder if they share a topic
+5. Present a summary:
 
 ```
 ✅ BATCH CAPTURE — [N] items
@@ -129,6 +182,8 @@ When the user provides multiple URLs:
 1. "[Title 1]" — [source] → [Strategy]
 2. "[Title 2]" — [source] → [Strategy]
 3. "[Title 3]" — [source] → [Strategy]
+
+📁 Filed under: Bookmarks → [Sub-folder]
 
 🔍 PATTERN DETECTED (if applicable)
 [All three articles point to the same trend: ...]
@@ -138,7 +193,10 @@ When the user provides multiple URLs:
 ## Rules
 
 - **Speed matters.** Capture should feel instant. Don't over-analyse — create the document quickly, then offer deeper analysis.
-- **Always attribute.** Include the source URL, author, and date. Never strip attribution.
+- **Never store the full article.** The URL is the source of truth. Store only the strategic digest — key claims, why it matters, and implications.
+- **Always attribute.** Include the source URL, author, and date in both the `metadata` field and the `::source-card` component.
+- **Always link artifacts.** Every signal and insight created from a capture MUST be linked back to the document via `link_entities`.
+- **Always place in tree.** Every captured document goes under Bookmarks with an intelligent sub-folder.
 - **Don't over-classify.** Not everything is a signal. Not everything is an insight. Sometimes it's just a useful document to have on file. That's fine.
 - **Ask about relevance, don't assume.** If you're unsure which strategy the content relates to, ask: "This looks like it could relate to [Strategy A] or [Strategy B] — which one?"
 - **Respect the user's context.** If they said "this is relevant to GTM", don't second-guess them and link it to product strategy instead.

@@ -6,15 +6,22 @@ You help team members capture external content — articles, posts, reports, thr
 
 Strategic capture turns passive reading into active intelligence. Instead of bookmarking an article and forgetting it, or sending a Slack message that gets buried, the user captures the content directly into Stratafy where it becomes:
 
-- A **document** — preserved and searchable in the workspace
+- A **document** — a strategic digest preserved and searchable in the workspace, filed under Bookmarks
 - A **signal** — if it indicates a change in the strategic environment
 - An **insight** — if it reveals something valuable about the business, market, or customers
 - Connected to **strategy** — linked to the strategies it affects
+- All **linked together** — document↔signal↔insight↔strategy form a connected intelligence graph
+
+## Content Philosophy
+
+**Store the strategic analysis, not the raw article.** The URL is the source of truth for the original content. What the team needs is what the content *means for us* — the key claims, strategic relevance, and implications. This keeps documents focused and actionable.
+
+The `::source-card` MDC component renders a rich source attribution header with the original URL, author, date, and a "View Original" link — so the full content is always one click away.
 
 ## The Capture Flow
 
 ```
-URL or Content → Fetch → Extract → Analyse → Store → Connect
+URL or Content → Fetch → Extract → Analyse → Store → Link → File
 ```
 
 ### 1. Fetch the Content
@@ -33,19 +40,16 @@ If the content fetch tool is not available, fall back to `WebFetch`. If that als
 
 **Note:** X/Twitter does NOT need `force_grok`. Cloudflare successfully renders posts, articles, and quoted tweets. Only reply threads are auth-walled.
 
-### 2. Extract Key Information
+### 2. Extract and Analyse
 
 From the fetched content, extract:
 - **Title** — the headline or name
 - **Author** — who wrote/posted it
 - **Source** — publication, platform, or website
 - **Date** — when it was published
-- **Core content** — the actual text, cleaned of navigation and ads
-- **Key claims** — the 3-5 most important assertions or data points
+- **Key claims** — the 3-5 most important assertions or data points with strategic annotations
 
-### 3. Analyse Strategic Relevance
-
-This is where capture becomes intelligence. For the extracted content, determine:
+Then analyse strategic relevance:
 
 **Relevance check:**
 - Does this relate to any of our active strategies?
@@ -58,31 +62,70 @@ This is where capture becomes intelligence. For the extracted content, determine
 - **Urgency**: low (interesting), medium (worth discussing), high (needs attention), critical (needs action now)
 - **Impact scope**: which strategies, initiatives, or teams are affected
 
-### 4. Store in Stratafy
-
-Based on the analysis, create one or more artifacts:
+### 3. Create Artifacts in Order
 
 **Always create a document:**
 - `create_document` with `category: "external_capture"`
-- Include the full extracted content, source URL, author, and date
-- Tag with relevant strategy areas
+- Use `metadata` field for structured source data: `{ source_url, source_domain, author, published_date, fetch_method, content_type }`
+- Content uses `::source-card` MDC component for rich source attribution
+- Content is the **strategic digest** — key claims with annotations, why it matters, implications
+- **Do NOT include the full article text** — the URL is the source of truth
 
 **Optionally create a signal:**
 - If the content indicates a change in the strategic environment
 - `create_signal` with appropriate type, source, and urgency
-- Link to the document for full context
 
 **Optionally create an insight:**
 - If the content reveals a pattern, validates a hypothesis, or surfaces a new understanding
 - `create_insight` with `source: "external_capture"`
-- Include the specific insight, not just "interesting article"
 
-### 5. Connect to Strategy
+### 4. Link Everything Together
 
-Link the captured content to relevant strategic elements:
-- `link_signal_to_strategy` — if a signal was created
-- `link_entities` — connect documents to strategies, initiatives, or objectives
+This is critical — without links, the artifacts are orphaned:
+- `link_entities` — connect document↔signal, document↔insight
+- `link_signal_to_strategy` — connect signal to affected strategies with impact descriptions
 - `link_assumption_to_context` — if the content validates or challenges an assumption
+
+### 5. File in Document Tree
+
+Place every captured document under a **Bookmarks** section with intelligent sub-folders:
+
+1. Check if a root-level "Bookmarks" section exists (from `get_document_tree`)
+2. If not, create it via `create_tree_section` with `label: "Bookmarks"`, `icon: "i-lucide-bookmark"`
+3. Choose or create a sub-folder based on content topic:
+   - Reuse existing sub-folders when the topic fits
+   - Create new ones with descriptive labels and appropriate Lucide icons
+   - Let sub-folders grow organically — don't force a fixed taxonomy
+4. Place the document via `place_document_in_tree`
+
+## Document Content Format
+
+The document content should use this structure:
+
+```markdown
+::source-card{url="https://..." author="Author Name" source="Publication" date="March 12, 2026" type="article"}
+::
+
+## Why This Matters
+
+[2-3 sentences connecting to our strategy. Be specific about which strategies are affected and why.]
+
+## Key Claims
+
+1. **[Claim]** — [Strategic annotation: what this means for us]
+2. **[Claim]** — [Strategic annotation]
+3. **[Claim]** — [Strategic annotation]
+
+## Implications for [Company]
+
+[What we should think about or do differently based on this content]
+```
+
+The `::source-card` component renders a styled card with:
+- Source favicon and domain
+- Author and publication date
+- Content type badge
+- "View Original" link to the source URL
 
 ## Role-Adapted Capture
 
@@ -114,8 +157,8 @@ If both the MCP server and WebFetch fail:
 
 1. **Tell the user clearly** — "I couldn't fetch that URL. The site blocks automated access."
 2. **Ask for paste** — "Could you paste the content or the key sections you'd like me to capture?"
-3. **Still capture it** — Even pasted content should go through the full analyse → store → connect flow
-4. **Note the source** — Record the URL even if you couldn't fetch it, so the document links back to the original
+3. **Still capture it** — Even pasted content should go through the full analyse → store → link → file flow
+4. **Note the source** — Record the URL in metadata even if you couldn't fetch it, with `fetch_method: "pasted"`
 
 ## Capture Quality Principles
 
@@ -128,6 +171,8 @@ If both the MCP server and WebFetch fail:
 4. **Source credibility matters** — Note the credibility of the source. A peer-reviewed study and a random blog post are both worth capturing, but they carry different weight.
 
 5. **Timeliness matters** — A signal about a competitor's funding round from yesterday is urgent. The same signal from 6 months ago is historical context. Tag accordingly.
+
+6. **Always link, always file** — Every capture must be linked to its signals/insights and filed in the Bookmarks tree. Orphaned artifacts are invisible artifacts.
 
 ## When to Use This Knowledge
 
