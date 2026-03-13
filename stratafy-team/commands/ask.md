@@ -11,6 +11,8 @@ Any natural language question:
 - "What metrics should I watch for the GTM strategy?"
 - "What decisions are pending around hiring?"
 - "What did we decide about the partnership approach?"
+- "What are our key priorities?"
+- "Show me our risks"
 
 ## Process
 
@@ -20,21 +22,68 @@ Call `log_activity` with:
 - `description`: `"ask"`
 - `metadata`: `{ "question": "<the user's question>" }`
 
-### Step 2: Search the Workspace
+### Step 2: Classify and Route the Question
 
-Run `search_workspace` with:
+Before searching, classify the question into a retrieval strategy. This determines which tools to call — and they should run **in parallel** where possible.
+
+#### Strategy A: Structured Listing
+**Trigger:** The question asks to list or enumerate a specific entity type.
+- "What are our risks?" / "Show me our assumptions" / "List our key priorities" / "What metrics do we track?"
+
+**Action:** Call BOTH in parallel:
+1. The dedicated list tool for the entity type
+2. `search_workspace` with the question (for cross-entity context)
+
+Entity type → list tool mapping:
+
+| Question pattern | List tool | Notes |
+| --- | --- | --- |
+| risks | `list_risks` | |
+| assumptions | `list_assumptions` | |
+| key priorities | `list_key_priorities` | |
+| metrics | `list_metrics` | |
+| objectives | `list_objectives` | |
+| strategies | `list_strategies` | |
+| initiatives | `list_initiatives` | |
+| decisions | `list_decisions` | |
+| signals | `list_signals` | |
+| insights | `list_insights` | |
+| feedback | `list_feedback` | |
+| reviews | `list_reviews` | |
+| values | `list_values` | |
+| principles | `list_principles` | |
+| beliefs | `list_beliefs` | |
+
+**Presentation:** Lead with the structured data in a scannable format (table or numbered list), then add cross-entity context from the semantic search below it.
+
+#### Strategy B: Targeted Lookup
+**Trigger:** The question asks about a specific topic, entity, or concept.
+- "What's our position on pricing?" / "Tell me about the GTM strategy" / "What did we decide about hiring?"
+
+**Action:** Run `search_workspace` only, with:
 - `query`: The user's question as-is
-- No `entity_types` filter — let semantic similarity decide what's relevant across all types
+- No `entity_types` filter
 - `limit`: 10
 - Default threshold (0.35)
 
+#### Strategy C: Cross-Cutting Analysis
+**Trigger:** The question is broad or asks for synthesis across multiple dimensions.
+- "What should I worry about?" / "What's changed recently?" / "What are we missing?"
+
+**Action:** Run `search_workspace` with the question, PLUS call supplementary tools in parallel where useful:
+- "What should I worry about?" → also call `get_high_risk_items` and `get_pending_decisions`
+- "What's our execution health?" → also call `list_objectives` and `list_key_priorities`
+
 ### Step 3: Assess Results
 
-Check the returned results:
-- If **0 results**: Tell the user directly — "Your workspace doesn't contain information that matches this question. This might mean the topic hasn't been documented yet, or the question is outside what's currently captured."
-- If **results are returned**: Proceed to answer.
+Evaluate result quality using calibrated similarity thresholds:
+- **Strong match** (similarity >= 0.45): High confidence — the workspace directly addresses this topic
+- **Moderate match** (similarity 0.38–0.45): Relevant context exists but may not directly answer the question
+- **Weak match** (similarity < 0.38): Tangential — caveat with "These results are related but may not directly address your question"
 
-For each result, note the `entity_type`, `name`, `similarity` score, and content. Higher similarity = more relevant.
+If **0 results** from all sources: Tell the user directly — "Your workspace doesn't contain information that matches this question. This might mean the topic hasn't been documented yet."
+
+For each result, note the `entity_type`, `entity_id`, `title`, `similarity` score, and content.
 
 ### Step 4: Answer the Question
 
@@ -42,13 +91,13 @@ Answer the user's question directly, grounded in the workspace content. Follow t
 
 **Grounding**
 - Answer ONLY from what the workspace contains. Do not supplement with general knowledge.
-- Reference specific entities by name: "Your risk register includes [Risk Name] which..."
+- Reference specific entities by name with hyperlinks: "Your risk register includes [Risk Name](url) which..."
 - Include entity types so the user knows where information lives: "According to your [strategy/initiative/decision]..."
 
 **Structure**
-- Lead with the direct answer in 2-3 sentences
-- Then provide supporting detail from the search results
-- Group related findings if multiple entity types are relevant
+- For **Strategy A** (listings): Present entities in a scannable format — table or numbered list with key fields. Then add any cross-entity context from the semantic search.
+- For **Strategy B** (targeted): Lead with the direct answer in 2-3 sentences, then provide supporting detail from the search results grouped by entity type.
+- For **Strategy C** (cross-cutting): Synthesise across the different data sources into a coherent answer with sections.
 
 **Critical intelligence**
 - If search results include high-severity risks, flag them even if not directly asked
@@ -57,16 +106,16 @@ Answer the user's question directly, grounded in the workspace content. Follow t
 
 **Honesty about gaps**
 - If the workspace partially answers the question, say what's covered and what's not
-- If results are low-similarity (below 0.5), caveat: "These results are tangentially related — the workspace may not directly address this topic"
+- If all results are weak matches (below 0.38), caveat accordingly
 
 ### Step 5: Log the Outcome
 
 After formulating the answer, log whether the question was successfully answered.
 
 Determine the `answer_quality` based on what happened:
-- **`"answered"`** — Search returned relevant results (top result similarity >= 0.5) and you could give a direct, grounded answer
-- **`"partial"`** — Search returned results but they were tangential (top similarity < 0.5), or the workspace only partially addressed the question
-- **`"unanswered"`** — Zero results, or results were too irrelevant to form a meaningful answer
+- **`"answered"`** — Relevant results found (top similarity >= 0.45 or structured list returned data) and you could give a direct, grounded answer
+- **`"partial"`** — Results were moderate (top similarity 0.38–0.45), or the workspace only partially addressed the question
+- **`"unanswered"`** — Zero results, or results were too weak to form a meaningful answer
 
 Call `log_activity` with:
 - `activity_type`: `"workspace_question"`
@@ -74,6 +123,7 @@ Call `log_activity` with:
 - `metadata`:
   - `question`: The user's original question
   - `answer_quality`: One of `"answered"`, `"partial"`, `"unanswered"`
+  - `retrieval_strategy`: One of `"structured_listing"`, `"targeted_lookup"`, `"cross_cutting"`
   - `result_count`: Number of search results returned
   - `top_similarity`: Similarity score of the best result (or 0 if no results)
   - `entity_types_found`: Array of entity types that appeared in results (e.g. `["strategy", "risk", "assumption"]`)
@@ -87,7 +137,7 @@ Based on what you found (or didn't find), suggest one or two next steps:
 
 - If the answer revealed a gap: "Your workspace doesn't have a documented position on [topic]. Want me to help draft one?"
 - If risks or assumptions surfaced: "There are [N] risks related to this. Want me to pull the full risk assessment?"
-- If the answer connects to a specific strategy: "This relates to your [Strategy Name]. Want me to run a health check on it?"
+- If the answer connects to a specific strategy: "This relates to your [Strategy Name](url). Want me to run a health check on it?"
 - If nothing was found: "Want me to help capture your thinking on this topic as an insight or decision?"
 
 ## Entity URL Construction
@@ -126,6 +176,26 @@ For foundation entities (if they appear):
 
 ## Output Format
 
+### For Structured Listings (Strategy A)
+
+```
+Here are your [entity type plural]:
+
+| # | Name | Status | [Key Field] |
+|---|------|--------|-------------|
+| 1 | [Entity Name](url) | active | [value] |
+| 2 | [Entity Name](url) | active | [value] |
+
+[If semantic search found cross-entity context:]
+RELATED CONTEXT
+  [Insight/strategy/decision that connects to these entities]
+
+SUGGESTED NEXT STEP
+  [One concrete follow-up action]
+```
+
+### For Targeted Lookups and Cross-Cutting Analysis (Strategy B & C)
+
 ```
 [Direct answer — 2-3 sentences answering the question]
 
@@ -148,13 +218,14 @@ SUGGESTED NEXT STEP
   [One concrete follow-up action]
 ```
 
-Every entity name in the response MUST be a markdown hyperlink to the entity in Stratafy. This applies to the SOURCES section and also to any entity referenced in the answer text itself.
+Every entity name in the response MUST be a markdown hyperlink to the entity in Stratafy. This applies to output tables, the SOURCES section, and any entity referenced in the answer text itself.
 
 ## Rules
 
 - Never answer from general knowledge. If the workspace doesn't have it, say so.
 - Keep the answer concise — this is a quick lookup, not a strategy review.
-- Reference entities by name so the user can find them in the workspace.
+- Reference entities by name with hyperlinks so the user can click through to Stratafy.
 - Surface critical intelligence (high risks, unvalidated assumptions) even if not directly asked.
 - Adapt language to the user's role (see role-adaptation skill).
 - If the question is conversational rather than a workspace query ("how are you?"), respond naturally without searching.
+- Always run tools in parallel where there are no dependencies between them.
