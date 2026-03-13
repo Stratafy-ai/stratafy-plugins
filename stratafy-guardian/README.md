@@ -1,21 +1,21 @@
-# Stratafy Cowork Plugin
+# Stratafy Guardian Plugin
 
-Claude Cowork plugin for strategy coaches and consultants.
+Claude plugin for strategy guardians, coaches, and consultants.
 
 ## Repository Structure
 
-The plugin is developed inside the main Stratafy monorepo at `cowork-plugin/` and published to a separate public repo:
+The plugin is developed inside the main Stratafy monorepo at `guardian-plugin/` and published to a separate public repo:
 
-| Location           | Repo                           | Purpose                       |
-| ------------------ | ------------------------------ | ----------------------------- |
-| `cowork-plugin/`   | `ljcremer/stratafy`            | Development (source of truth) |
-| `stratafy-cowork/` | `Stratafy-ai/stratafy-plugins` | Published plugin (public)     |
+| Location              | Repo                           | Purpose                       |
+| --------------------- | ------------------------------ | ----------------------------- |
+| `guardian-plugin/`    | `ljcremer/stratafy`            | Development (source of truth) |
+| `stratafy-guardian/`  | `Stratafy-ai/stratafy-plugins` | Published plugin (public)     |
 
-The directory is renamed during publish: `cowork-plugin/` locally becomes `stratafy-cowork/` in the plugin repo.
+The directory is renamed during publish: `guardian-plugin/` locally becomes `stratafy-guardian/` in the plugin repo.
 
 ## Versioning
 
-Version is tracked in `cowork-plugin/.claude-plugin/plugin.json`:
+Version is tracked in `guardian-plugin/.claude-plugin/plugin.json`:
 
 ```json
 {
@@ -40,11 +40,11 @@ After making changes locally, sync to the plugin repo:
 git clone https://github.com/Stratafy-ai/stratafy-plugins.git /tmp/stratafy-plugins
 
 # 2. Sync local changes (rsync handles additions, updates, and deletions)
-rsync -av --delete cowork-plugin/ /tmp/stratafy-plugins/stratafy-cowork/ --exclude='.git'
+rsync -av --delete guardian-plugin/ /tmp/stratafy-plugins/stratafy-guardian/ --exclude='.git'
 
 # 3. Commit and push
 cd /tmp/stratafy-plugins
-git add stratafy-cowork/
+git add stratafy-guardian/
 git commit -m "feat: describe what changed"
 git push origin main
 

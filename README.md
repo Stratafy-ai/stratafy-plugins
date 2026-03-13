@@ -1,12 +1,12 @@
 # Stratafy Plugins
 
-Claude Cowork plugins for Stratafy — the operating system for strategy.
+Claude plugins for Stratafy — the operating system for strategy.
 
 ## Plugins
 
 | Plugin | Who It's For | Description |
 | --- | --- | --- |
-| [`stratafy-cowork`](./stratafy-cowork/) | Strategy coaches & consultants | Workspace setup, session debriefs, strategy reviews, radar scans |
+| [`stratafy-guardian`](./stratafy-guardian/) | Strategy guardians, coaches & consultants | Workspace setup, session debriefs, strategy reviews, radar scans |
 | [`stratafy-finance`](./stratafy-finance/) | Finance Directors & finance teams | COA design, financial alignment scans, budget mapping, investor prep |
 | [`stratafy-team`](./stratafy-team/) | Every team member | Daily/weekly rhythm, strategic context, role-adapted coaching |
 | [`stratafy-chief-of-staff`](./stratafy-chief-of-staff/) | Founders, CEOs, Chiefs of Staff | Exec briefs, initiative tracking, alignment checks, decision logs |
@@ -14,7 +14,7 @@ Claude Cowork plugins for Stratafy — the operating system for strategy.
 ## Installation
 
 ```bash
-claude plugins add Stratafy-ai/stratafy-plugins/stratafy-cowork
+claude plugins add Stratafy-ai/stratafy-plugins/stratafy-guardian
 claude plugins add Stratafy-ai/stratafy-plugins/stratafy-finance
 claude plugins add Stratafy-ai/stratafy-plugins/stratafy-team
 claude plugins add Stratafy-ai/stratafy-plugins/stratafy-chief-of-staff
@@ -26,7 +26,7 @@ Plugins are developed inside the main Stratafy monorepo and synced here for publ
 
 | Local (monorepo)          | Published (this repo)        |
 | ------------------------- | ---------------------------- |
-| `cowork-plugin/`          | `stratafy-cowork/`           |
+| `guardian-plugin/`        | `stratafy-guardian/`         |
 | `finance-plugin/`         | `stratafy-finance/`          |
 | `team-plugin/`            | `stratafy-team/`             |
 | `chief-of-staff-plugin/`  | `stratafy-chief-of-staff/`   |
@@ -38,7 +38,7 @@ Plugins are developed inside the main Stratafy monorepo and synced here for publ
 git clone https://github.com/Stratafy-ai/stratafy-plugins.git /tmp/stratafy-plugins
 
 # Sync whichever plugin changed
-rsync -av --delete cowork-plugin/ /tmp/stratafy-plugins/stratafy-cowork/ --exclude='.git'
+rsync -av --delete guardian-plugin/ /tmp/stratafy-plugins/stratafy-guardian/ --exclude='.git'
 rsync -av --delete finance-plugin/ /tmp/stratafy-plugins/stratafy-finance/ --exclude='.git'
 
 # Commit and push

@@ -12,9 +12,9 @@
   },
   "plugins": [
     {
-      "name": "stratafy-cowork",
-      "source": "./stratafy-cowork",
-      "description": "Turn strategy sessions into living strategic workspaces. Set up client workspaces, debrief sessions, track execution, and run intelligence scans — powered by 169 strategic tools via MCP.",
+      "name": "stratafy-guardian",
+      "source": "./stratafy-guardian",
+      "description": "Guardian of your strategy. Watches over structural health, content quality, execution alignment, and strategic coherence — surfacing what needs attention before it becomes a problem.",
       "version": "1.4.0",
       "author": {
         "name": "Stratafy"
@@ -30,7 +30,7 @@
         "risk",
         "signals",
         "mcp",
-        "cowork"
+        "guardian"
       ],
       "category": "productivity"
     },
@@ -52,8 +52,7 @@
         "chart-of-accounts",
         "budget",
         "alignment",
-        "mcp",
-        "cowork"
+        "mcp"
       ],
       "category": "finance"
     },
@@ -78,8 +77,7 @@
         "daily",
         "weekly",
         "linear",
-        "mcp",
-        "cowork"
+        "mcp"
       ],
       "category": "productivity"
     },
@@ -102,8 +100,7 @@
         "initiatives",
         "leadership",
         "strategy",
-        "mcp",
-        "cowork"
+        "mcp"
       ],
       "category": "productivity"
     }

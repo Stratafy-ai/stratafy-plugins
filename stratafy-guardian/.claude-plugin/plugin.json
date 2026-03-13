@@ -1,0 +1,11 @@
+{
+  "name": "stratafy-guardian",
+  "version": "1.5.0",
+  "description": "Guardian of your strategy. Watches over structural health, content quality, execution alignment, and strategic coherence — surfacing what needs attention before it becomes a problem.",
+  "author": {
+    "name": "Stratafy",
+    "url": "https://stratafy.ai"
+  },
+  "homepage": "https://github.com/Stratafy-ai/stratafy-plugins",
+  "license": "Apache-2.0"
+}
