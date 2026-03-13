@@ -56,16 +56,19 @@ The `--delete` flag in rsync ensures removed files are also removed in the plugi
 
 ## Plugin Contents
 
-### Commands (6)
+### Commands (9)
 
-| Command                     | Description                                       |
-| --------------------------- | ------------------------------------------------- |
-| `/stratafy:setup-workspace` | Onboard a new client workspace from a company URL |
-| `/stratafy:session-debrief` | Parse session notes into strategic artifacts      |
-| `/stratafy:radar-scan`      | Run competitive/market intelligence scans         |
-| `/stratafy:pulse`           | Quick strategic health check                      |
-| `/stratafy:decision-brief`  | Prepare context for a pending decision            |
-| `/stratafy:strategy-review` | Deep strategy review with alignment scans         |
+| Command                          | Description                                          |
+| -------------------------------- | ---------------------------------------------------- |
+| `/stratafy:setup-workspace`      | Onboard a new client workspace from a company URL    |
+| `/stratafy:session-debrief`      | Parse session notes into strategic artifacts         |
+| `/stratafy:radar-scan`           | Run competitive/market intelligence scans            |
+| `/stratafy:pulse`                | Quick strategic health check                         |
+| `/stratafy:decision-brief`       | Prepare context for a pending decision               |
+| `/stratafy:strategy-review`      | Deep strategy review with alignment scans            |
+| `/stratafy:strategy-tree-review` | Structural quality audit of a strategy branch        |
+| `/stratafy:health-check`         | Strategy health score diagnostic across workspace    |
+| `/stratafy:team-rhythm`          | Team activity and rhythm analysis                    |
 
 ### Skills (7)
 
