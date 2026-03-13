@@ -56,23 +56,59 @@ From the fetched content, extract the **strategic digest** — not the raw artic
 
 **Do NOT store the full article text.** The URL is the source of truth. Store only the strategic analysis.
 
-### Step 5: Determine Output Types
+### Step 5: Present Capture Preview
 
-Based on the analysis, decide what to create:
+**Do NOT create anything yet.** Present the proposed capture to the user for review and discussion.
 
-**Always create a document** with the `::source-card` MDC component for rich source attribution.
+```
+📋 CAPTURE PREVIEW
 
-**Create a signal if:**
-- The content indicates a change in the market, competitive landscape, technology, or regulatory environment
-- Something new is happening that wasn't happening before
-- A competitor made a move, a regulation changed, a trend emerged
+📄 Document: "[Title]"
+   Source: [author] via [publication], [date]
+   📁 File under: Bookmarks → [Sub-folder name]
 
-**Create an insight if:**
-- The content reveals a pattern or validates/challenges a hypothesis
-- There's a specific "aha" that's worth preserving beyond the raw content
-- A data point changes how you think about an existing strategy or assumption
+   ## Why This Matters
+   [2-3 sentences connecting to our strategy]
+
+   ## Key Claims
+   1. **[Claim]** — [Strategic annotation]
+   2. **[Claim]** — [Strategic annotation]
+   3. **[Claim]** — [Strategic annotation]
+
+   ## Implications
+   [What we should think about or do differently]
+
+   🔗 Connects to: [Strategy 1], [Strategy 2]
+
+📡 Signal: "[Signal title]" (if proposing one)
+   Type: [market/competitive/regulatory/etc.]
+   Urgency: [low/medium/high/critical]
+
+💡 Insight: "[Insight title]" (if proposing one)
+   [One-sentence insight]
+
+---
+Ready to capture? You can:
+- ✅ "Go" or "capture it" — save as shown
+- ✏️ Adjust anything — change the claims, relevance, signal urgency, etc.
+- ➕ "Also create a signal/insight" — add artifacts I didn't suggest
+- ➖ "Skip the signal/insight" — remove artifacts I suggested
+- 🗑️ "Don't capture" — discard
+```
+
+**Wait for the user to confirm or adjust.** This is a conversation — the user may want to:
+- Reword claims or annotations
+- Change which strategies it connects to
+- Adjust signal urgency
+- Add or remove signals/insights
+- Change the bookmark sub-folder
+- Ask questions about the content before deciding
+
+Iterate until the user is happy, then proceed to Step 6.
 
 ### Step 6: Create Artifacts and Connect
+
+**Only proceed after user confirmation.**
 
 **Order matters.** Create artifacts in this sequence, then link them together:
 
@@ -96,24 +132,24 @@ create_document:
 
     ## Why This Matters
 
-    [2-3 sentences connecting to our strategy. Be specific about which strategies are affected and why.]
+    [As confirmed/adjusted by user]
 
     ## Key Claims
 
-    1. **[Claim]** — [Strategic annotation: what this means for us]
+    1. **[Claim]** — [Strategic annotation as confirmed/adjusted]
     2. **[Claim]** — [Strategic annotation]
     3. **[Claim]** — [Strategic annotation]
 
     ## Implications for [Company]
 
-    [What we should think about or do differently based on this content]
+    [As confirmed/adjusted by user]
 ```
 
-#### 6b. Create signal (if warranted)
+#### 6b. Create signal (if confirmed)
 
 Create via `create_signal` with the source URL. Get the signal ID from the response.
 
-#### 6c. Create insight (if warranted)
+#### 6c. Create insight (if confirmed)
 
 Create via `create_insight` with the source URL. Get the insight ID from the response.
 
@@ -124,18 +160,12 @@ Create via `create_insight` with the source URL. Get the insight ID from the res
 
 #### 6e. Place in document tree
 
-Place the document under a **Bookmarks** section with intelligent sub-folders:
+Place the document under the confirmed **Bookmarks** sub-folder:
 
 1. Check if a root-level section named "Bookmarks" exists in the document tree (from Step 3)
 2. If not, create it: `create_tree_section` with `label: "Bookmarks"`, `icon: "i-lucide-bookmark"`
-3. Decide the sub-folder based on the content topic. Look at existing sub-folders first — reuse one if it fits. Examples:
-   - "AI & Architecture" for AI/tech architecture content
-   - "Market & Competitors" for competitive intelligence
-   - "Industry News" for general industry developments
-   - "Product Ideas" for feature inspiration
-   - "Regulatory & Compliance" for legal/regulatory changes
-4. If no existing sub-folder fits, create a new one: `create_tree_section` with a descriptive label and appropriate icon
-5. Place the document: `place_document_in_tree` with `document_id`, `parent_id` (the sub-folder ID)
+3. Use the sub-folder confirmed by the user. If it doesn't exist yet, create it with `create_tree_section`
+4. Place the document: `place_document_in_tree` with `document_id`, `parent_id` (the sub-folder ID)
 
 ### Step 7: Present Results
 
@@ -173,26 +203,41 @@ When the user provides multiple URLs:
 1. Fetch all URLs in parallel
 2. Analyse each independently
 3. Look for **patterns across captures** — do they all point to the same trend?
-4. Place all documents in the same Bookmarks sub-folder if they share a topic
-5. Present a summary:
+4. Present a **batch preview** for the user to review all at once:
 
 ```
-✅ BATCH CAPTURE — [N] items
+📋 BATCH CAPTURE PREVIEW — [N] items
 
-1. "[Title 1]" — [source] → [Strategy]
-2. "[Title 2]" — [source] → [Strategy]
-3. "[Title 3]" — [source] → [Strategy]
+1. 📄 "[Title 1]" — [source]
+   Claims: [key claim summary]
+   → [Strategy] | 📁 Bookmarks → [Sub-folder]
 
-📁 Filed under: Bookmarks → [Sub-folder]
+2. 📄 "[Title 2]" — [source]
+   Claims: [key claim summary]
+   → [Strategy] | 📁 Bookmarks → [Sub-folder]
+   📡 Proposed signal: "[Signal title]" (medium urgency)
+
+3. 📄 "[Title 3]" — [source]
+   Claims: [key claim summary]
+   → [Strategy] | 📁 Bookmarks → [Sub-folder]
 
 🔍 PATTERN DETECTED (if applicable)
 [All three articles point to the same trend: ...]
-[Created signal: "..." with high urgency]
+[Proposing signal: "..." with high urgency]
+
+---
+Ready to capture all? You can:
+- ✅ "Capture all" — save everything as shown
+- ✏️ Adjust any item by number — "change #2's signal to high urgency"
+- ➖ "Skip #3" — exclude an item
+- 🗑️ "Don't capture" — discard all
 ```
+
+5. Wait for user confirmation, then create all artifacts and place in Bookmarks sub-folders
 
 ## Rules
 
-- **Speed matters.** Capture should feel instant. Don't over-analyse — create the document quickly, then offer deeper analysis.
+- **Analyse fast, confirm before saving.** Fetch and analyse quickly, but always present the preview and wait for the user to confirm before creating anything in Stratafy.
 - **Never store the full article.** The URL is the source of truth. Store only the strategic digest — key claims, why it matters, and implications.
 - **Always attribute.** Include the source URL, author, and date in both the `metadata` field and the `::source-card` component.
 - **Always link artifacts.** Every signal and insight created from a capture MUST be linked back to the document via `link_entities`.

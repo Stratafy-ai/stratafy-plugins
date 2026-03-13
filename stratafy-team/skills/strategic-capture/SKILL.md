@@ -21,8 +21,10 @@ The `::source-card` MDC component renders a rich source attribution header with 
 ## The Capture Flow
 
 ```
-URL or Content → Fetch → Extract → Analyse → Store → Link → File
+URL or Content → Fetch → Extract → Analyse → Preview → Confirm → Store → Link → File
 ```
+
+**The user always confirms before anything is saved.** After fetching and analysing, present a preview of what you propose to capture — the strategic digest, which strategies it connects to, whether to create signals or insights, and where to file it. The user can discuss, adjust, and iterate before giving the go-ahead.
 
 ### 1. Fetch the Content
 
@@ -62,7 +64,19 @@ Then analyse strategic relevance:
 - **Urgency**: low (interesting), medium (worth discussing), high (needs attention), critical (needs action now)
 - **Impact scope**: which strategies, initiatives, or teams are affected
 
-### 3. Create Artifacts in Order
+### 3. Preview and Confirm
+
+Present the proposed capture to the user before creating anything:
+- The strategic digest (title, key claims with annotations, why it matters, implications)
+- Which strategies it connects to
+- Whether you're proposing a signal and/or insight
+- Where it will be filed in the Bookmarks tree
+
+**Wait for the user to confirm or adjust.** They may want to reword claims, change strategy connections, add or remove signals/insights, or ask questions about the content first. Iterate until they're satisfied.
+
+### 4. Create Artifacts in Order
+
+**Only after user confirmation.**
 
 **Always create a document:**
 - `create_document` with `category: "external_capture"`
@@ -79,14 +93,14 @@ Then analyse strategic relevance:
 - If the content reveals a pattern, validates a hypothesis, or surfaces a new understanding
 - `create_insight` with `source: "external_capture"`
 
-### 4. Link Everything Together
+### 5. Link Everything Together
 
 This is critical — without links, the artifacts are orphaned:
 - `link_entities` — connect document↔signal, document↔insight
 - `link_signal_to_strategy` — connect signal to affected strategies with impact descriptions
 - `link_assumption_to_context` — if the content validates or challenges an assumption
 
-### 5. File in Document Tree
+### 6. File in Document Tree
 
 Place every captured document under a **Bookmarks** section with intelligent sub-folders:
 
