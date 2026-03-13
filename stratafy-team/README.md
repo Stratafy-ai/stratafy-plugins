@@ -25,6 +25,7 @@ Stratafy Team gives every person in your organisation an AI partner that underst
 - **`/advise-me`** — Direct advice with trade-offs and a clear recommendation
 
 ### Intelligence
+- **`/ask`** — Ask any question grounded in your live strategy workspace — semantic search across all entities
 - **`/capture`** — Capture articles, tweets, reports from a URL — extract, analyse, and connect to strategy
 
 ## Skills

@@ -67,4 +67,5 @@ Guide users to commands when appropriate:
 - Lost the thread? `/stratafy-team:why-are-we-doing-this`
 - Need to think something through? `/stratafy-team:coach-me`
 - Need a direct recommendation? `/stratafy-team:advise-me`
+- Got a question about the workspace? `/stratafy-team:ask`
 - Found something worth capturing? `/stratafy-team:capture`
