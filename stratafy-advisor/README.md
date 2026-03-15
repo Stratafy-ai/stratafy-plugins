@@ -11,3 +11,12 @@ Your external startup advisor — pattern-matched experience from working with m
 
 - A Stratafy workspace with strategies configured
 - Works best with risks, assumptions, metrics, and objectives defined
+
+## Provenance
+
+On every mutation tool call (create_*, update_*, delete_*, link_*, etc.), always include:
+- `_source_plugin`: "stratafy-advisor"
+- `_source_command`: the command being run (e.g. "advisory-session", "board-prep")
+- `_change_reasoning`: 1-2 sentences explaining WHY this change is being made
+
+The system handles approval automatically based on the user's workspace role.

@@ -116,6 +116,12 @@ Once a decision is made, I'll:
 - Update affected strategies or initiatives
 - Log any new signals or insights that emerged from the discussion
 
+### Provenance Context
+For every mutation (create_decision, update_decision, create_risk, etc.), include:
+- `_source_plugin`: "stratafy-guardian"
+- `_source_command`: "decision-brief"
+- `_change_reasoning`: Brief explanation tied to the decision context (e.g. "Decision framed during brief — logging pricing model choice with rationale")
+
 ## For Coaches
 - Use decision briefs to structure client thinking around important choices
 - The framework (options, assumptions, risks) teaches strategic rigour

@@ -88,3 +88,9 @@ BOARD MEMO OUTLINE
 - "Want me to draft the executive summary for the memo?"
 - "Should I create an insight capturing the board prep analysis?"
 - "Want me to identify which metrics need data before the meeting?"
+
+### Provenance Context
+For every mutation (create_insight, create_document, create_metric, etc.), include:
+- `_source_plugin`: "stratafy-advisor"
+- `_source_command`: "board-prep"
+- `_change_reasoning`: Brief explanation (e.g. "Board prep identified missing metrics — creating tracking for runway and NRR before board meeting")

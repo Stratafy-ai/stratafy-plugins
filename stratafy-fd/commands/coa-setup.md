@@ -41,6 +41,12 @@ I'll pull the full strategic context:
 - `create_finance_proposal` — With a strategic narrative explaining the design philosophy
 - `create_finance_account` or `bulk_create_finance_accounts` — Add all accounts
 
+### Provenance Context
+For every mutation in this setup, include:
+- `_source_plugin`: "stratafy-fd"
+- `_source_command`: "coa-setup"
+- `_change_reasoning`: Brief explanation (e.g. "Designing strategy-aligned COA — creating revenue accounts mapped to GTM strategy")
+
 ### Step 4: Map to Strategies
 For every postable account:
 - `create_finance_mapping` — Connect to the strategy it serves

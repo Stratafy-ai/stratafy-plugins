@@ -116,6 +116,12 @@ Unit Economics:
 - `create_risk` — Pricing risks (competitive undercut, value perception, market shift)
 - `create_decision` — The pricing decision itself with rationale and alternatives considered
 
+### Provenance Context
+For every mutation in this step, include:
+- `_source_plugin`: "stratafy-fd"
+- `_source_command`: "pricing-model"
+- `_change_reasoning`: Brief explanation (e.g. "Logging pricing model assumptions — 3-tier SaaS structure based on strategy analysis")
+
 ### Analysis Mode (evaluating existing pricing)
 
 #### Step 1: Gather Current State

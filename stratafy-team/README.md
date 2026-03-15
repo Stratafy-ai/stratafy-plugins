@@ -48,3 +48,12 @@ Stratafy Team gives every person in your organisation an AI partner that underst
 2. Connect your Stratafy workspace via MCP
 3. Connect Linear via MCP (optional)
 4. Start with `/lets-go` or `/start-the-week`
+
+## Provenance
+
+On every mutation tool call (create_*, update_*, delete_*, link_*, etc.), always include:
+- `_source_plugin`: "stratafy-team"
+- `_source_command`: the command being run (e.g. "call-it-a-day", "advise-me")
+- `_change_reasoning`: 1-2 sentences explaining WHY this change is being made
+
+The system handles approval automatically based on the user's workspace role.

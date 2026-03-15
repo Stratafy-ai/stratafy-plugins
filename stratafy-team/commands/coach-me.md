@@ -53,6 +53,12 @@ When coaching surfaces a genuine realisation:
 - `create_insight` with `source: "coaching_session"`, relevant category, and tags
 - Briefly confirm what you captured: "I've logged that insight — [summary]"
 
+### Provenance Context
+For every mutation (create_insight, etc.), include:
+- `_source_plugin`: "stratafy-team"
+- `_source_command`: "coach-me"
+- `_change_reasoning`: Brief explanation (e.g. "Coaching session surfaced realisation about team capacity constraints")
+
 ### Step 5: Close with Commitment
 
 End the coaching session with:

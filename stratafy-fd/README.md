@@ -35,3 +35,12 @@ Same skills, same commands — different voice and authority level. The Stratafy
 ## MCP Servers (2)
 
 Configured in `.mcp.json`: Stratafy, Linear.
+
+## Provenance
+
+On every mutation tool call (create_*, update_*, delete_*, link_*, etc.), always include:
+- `_source_plugin`: "stratafy-fd"
+- `_source_command`: the command being run (e.g. "coa-setup", "pricing-model")
+- `_change_reasoning`: 1-2 sentences explaining WHY this change is being made
+
+The system handles approval automatically based on the user's workspace role.

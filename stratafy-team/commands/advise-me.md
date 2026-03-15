@@ -92,6 +92,12 @@ If the advice leads to a decision, offer to log it:
 - `create_decision` with context, options considered, rationale, and the chosen path
 - Link to relevant strategy via `strategy_id`
 
+### Provenance Context
+For every mutation (create_decision, etc.), include:
+- `_source_plugin`: "stratafy-team"
+- `_source_command`: "advise-me"
+- `_change_reasoning`: Brief explanation (e.g. "Advisory conversation led to prioritisation decision — choosing feature A over B based on strategic alignment")
+
 ## Rules
 
 - Lead with the recommendation, not the analysis. "I'd do X" first, then explain why.

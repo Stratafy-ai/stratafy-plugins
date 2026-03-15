@@ -46,3 +46,9 @@ RECOMMENDATIONS
 
 - "Want me to draft positioning statements for the gaps?"
 - "Should I create an insight capturing the brand alignment issues?"
+
+### Provenance Context
+For every mutation (create_insight, create_document, etc.), include:
+- `_source_plugin`: "stratafy-cmo"
+- `_source_command`: "brand-audit"
+- `_change_reasoning`: Brief explanation (e.g. "Brand audit revealed messaging gap — logging insight on positioning misalignment with growth strategy")

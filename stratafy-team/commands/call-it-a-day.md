@@ -47,6 +47,12 @@ Go through these 5 steps **one at a time**. Ask one question, wait for the answe
 
 ## Insight Logging
 
+### Provenance Context
+For every mutation (create_insight, create_risk), include:
+- `_source_plugin`: "stratafy-team"
+- `_source_command`: "call-it-a-day"
+- `_change_reasoning`: Brief explanation tied to the reflection (e.g. "End-of-day reflection surfaced alignment concern with GTM strategy")
+
 As reflection insights emerge during **any step**, proactively call `create_insight`:
 - **source**: `"execution_session"`
 - **category**: Most appropriate from: `"strategic"`, `"operational"`, `"product"`, `"market"`, `"team"`, `"technical"`

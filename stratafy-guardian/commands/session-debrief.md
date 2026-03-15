@@ -57,6 +57,12 @@ I'll read through your input and identify:
 - Market information, competitive intelligence, or trends mentioned
 - Customer feedback or industry shifts discussed
 
+### Provenance Context
+For every mutation in this debrief, include:
+- `_source_plugin`: "stratafy-guardian"
+- `_source_command`: "session-debrief"
+- `_change_reasoning`: Brief explanation tied to what was discussed (e.g. "Board discussed pivot to enterprise — creating new strategic direction")
+
 ### Step 3: Review Before Creating
 Before writing anything to the workspace, I'll present a summary of what I plan to create:
 

@@ -54,3 +54,9 @@ CONSTRAINTS
 
 - "Want me to log this as a decision?"
 - "Should I create an initiative for this campaign?"
+
+### Provenance Context
+For every mutation (create_decision, create_initiative, etc.), include:
+- `_source_plugin`: "stratafy-cmo"
+- `_source_command`: "campaign-brief"
+- `_change_reasoning`: Brief explanation (e.g. "Campaign brief led to new initiative — Q2 product launch campaign aligned to growth strategy")

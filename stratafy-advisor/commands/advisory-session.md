@@ -70,3 +70,9 @@ THE ONE THING
 - "Want me to create a risk for the pattern I flagged?"
 - "Should I log an insight capturing the blind spots we discussed?"
 - "Want me to help frame the pending decisions so they can be resolved?"
+
+### Provenance Context
+For every mutation (create_risk, create_insight, create_decision, etc.), include:
+- `_source_plugin`: "stratafy-advisor"
+- `_source_command`: "advisory-session"
+- `_change_reasoning`: Brief explanation (e.g. "Advisory session identified focus diffusion risk — too many strategies for seed stage")
