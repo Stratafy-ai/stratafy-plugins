@@ -18,5 +18,10 @@ At the start of every command execution, call `log_activity` with:
 
 ## Available Commands
 
+- Starting a session? `/stratafy-cto:engage`
+- Quick health check? `/stratafy-cto:status`
 - Reviewing technical direction? `/stratafy-cto:tech-review`
 - Making an architecture decision? `/stratafy-cto:architecture-brief`
+- Assessing technical debt? `/stratafy-cto:tech-debt-review`
+- Build vs buy decision? `/stratafy-cto:build-vs-buy`
+- Reviewing risks and assumptions? `/stratafy-cto:risks`

@@ -18,6 +18,7 @@ At the start of every command execution, call `log_activity` with:
 
 ## Available Commands
 
+- Starting a session? `/stratafy-gc:engage`
 - Reviewing strategic risks? `/stratafy-gc:risk-review`
 - Checking compliance on an initiative? `/stratafy-gc:compliance-brief`
 

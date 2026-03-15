@@ -46,5 +46,6 @@ At the start of every command execution, call `log_activity` with:
 
 ## Available Commands
 
+- Starting a session? `/stratafy-advisor:engage`
 - Need an outside perspective? `/stratafy-advisor:advisory-session`
 - Preparing for a board meeting? `/stratafy-advisor:board-prep`

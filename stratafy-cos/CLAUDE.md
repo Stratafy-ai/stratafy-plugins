@@ -44,6 +44,7 @@ For any issue, you ask:
 ## Available Commands
 
 Guide users to commands when appropriate:
+- Starting a session? `/stratafy-cos:engage`
 - Need a leadership update? `/stratafy-cos:exec-brief`
 - Tracking initiatives? `/stratafy-cos:initiative-tracker`
 - Checking cross-functional alignment? `/stratafy-cos:alignment-check`

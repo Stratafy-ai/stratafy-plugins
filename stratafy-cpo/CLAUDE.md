@@ -18,5 +18,6 @@ At the start of every command execution, call `log_activity` with:
 
 ## Available Commands
 
+- Starting a session? `/stratafy-cpo:engage`
 - Reviewing the roadmap? `/stratafy-cpo:roadmap-review`
 - Scoping a feature? `/stratafy-cpo:feature-brief`

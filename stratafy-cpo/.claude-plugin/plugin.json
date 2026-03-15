@@ -1,6 +1,6 @@
 {
   "name": "stratafy-cpo",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Your fractional CPO — connects product to strategic intent. Roadmap reviews against strategy, feature briefs grounded in strategic objectives, and product decisions that serve the mission.",
   "author": { "name": "Stratafy", "url": "https://stratafy.ai" },
   "homepage": "https://github.com/Stratafy-ai/stratafy-plugins",

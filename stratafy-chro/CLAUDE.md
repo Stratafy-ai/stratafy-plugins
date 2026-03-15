@@ -18,5 +18,6 @@ At the start of every command execution, call `log_activity` with:
 
 ## Available Commands
 
+- Starting a session? `/stratafy-chro:engage`
 - Reviewing team health? `/stratafy-chro:team-health`
 - Planning a hire? `/stratafy-chro:hiring-brief`

@@ -18,5 +18,6 @@ At the start of every command execution, call `log_activity` with:
 
 ## Available Commands
 
+- Starting a session? `/stratafy-cmo:engage`
 - Brand positioning off? `/stratafy-cmo:brand-audit`
 - Planning a campaign? `/stratafy-cmo:campaign-brief`
