@@ -58,8 +58,8 @@
       ]
     },
     {
-      "name": "stratafy-cos",
-      "source": "./stratafy-cos",
+      "name": "stratafy-expert-cos",
+      "source": "./stratafy-expert-cos",
       "description": "Your fractional Chief of Staff \u2014 cross-functional alignment, executive reporting, initiative tracking, decision facilitation, and operational rhythm for leadership teams.",
       "version": "0.2.0",
       "author": {
@@ -75,8 +75,8 @@
       ]
     },
     {
-      "name": "stratafy-cmo",
-      "source": "./stratafy-cmo",
+      "name": "stratafy-expert-cmo",
+      "source": "./stratafy-expert-cmo",
       "description": "Your fractional CMO \u2014 brand audits, campaign briefs, positioning analysis, and marketing-strategy alignment for marketing leaders.",
       "version": "0.2.0",
       "author": {
@@ -92,8 +92,8 @@
       ]
     },
     {
-      "name": "stratafy-cro",
-      "source": "./stratafy-cro",
+      "name": "stratafy-expert-cro",
+      "source": "./stratafy-expert-cro",
       "description": "Your fractional CRO \u2014 pipeline reviews, deal strategy, revenue alignment, and go-to-market execution for revenue leaders.",
       "version": "0.2.0",
       "author": {
@@ -110,8 +110,8 @@
       ]
     },
     {
-      "name": "stratafy-cpo",
-      "source": "./stratafy-cpo",
+      "name": "stratafy-expert-cpo",
+      "source": "./stratafy-expert-cpo",
       "description": "Your fractional CPO \u2014 roadmap reviews, feature briefs, product-strategy alignment, and prioritisation for product leaders.",
       "version": "0.2.0",
       "author": {
@@ -127,8 +127,8 @@
       ]
     },
     {
-      "name": "stratafy-cto",
-      "source": "./stratafy-cto",
+      "name": "stratafy-expert-cto",
+      "source": "./stratafy-expert-cto",
       "description": "Your fractional CTO \u2014 connects technology decisions to strategic intent. Technical architecture reviews, build-vs-buy analysis, and engineering decisions that serve the mission.",
       "version": "0.2.1",
       "author": {
@@ -144,8 +144,8 @@
       ]
     },
     {
-      "name": "stratafy-chro",
-      "source": "./stratafy-chro",
+      "name": "stratafy-expert-chro",
+      "source": "./stratafy-expert-chro",
       "description": "Your fractional CHRO \u2014 team health checks, hiring briefs, org-strategy alignment, and people analytics for people leaders.",
       "version": "0.2.0",
       "author": {
@@ -162,8 +162,8 @@
       ]
     },
     {
-      "name": "stratafy-gc",
-      "source": "./stratafy-gc",
+      "name": "stratafy-expert-gc",
+      "source": "./stratafy-expert-gc",
       "description": "Your fractional General Counsel \u2014 risk reviews, compliance briefs, regulatory alignment, and governance oversight for legal and compliance teams.",
       "version": "0.2.0",
       "author": {
@@ -180,8 +180,8 @@
       ]
     },
     {
-      "name": "stratafy-advisor",
-      "source": "./stratafy-advisor",
+      "name": "stratafy-expert-advisor",
+      "source": "./stratafy-expert-advisor",
       "description": "Your fractional startup advisor \u2014 advisory sessions, board prep, stage-specific pattern recognition, and strategic guidance from an experienced external perspective.",
       "version": "0.2.0",
       "author": {
